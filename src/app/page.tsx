@@ -82,6 +82,15 @@ export default function HomePage() {
     setAiOutput(result);
   };
 
+  const handleExportRules = () => {
+    const blob = new Blob([JSON.stringify(rules, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'rules.json';
+    a.click();
+  };
+
   return (
     <Box sx={{ padding: 4 }}>
       <Typography variant="h4" gutterBottom>
@@ -164,6 +173,10 @@ export default function HomePage() {
               </div>
             ))}
           </List>
+
+          <Button variant="contained" color="success" sx={{ mt: 2 }} onClick={handleExportRules}>
+            📦 Export rules.json
+          </Button>
         </Box>
       )}
 
